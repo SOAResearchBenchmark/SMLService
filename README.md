@@ -4,6 +4,12 @@ SMLService
 Statistics and Machine Learning Web Service offers statistical and machine learning methods to analyze data.
 The machine learning part uses the Weka java library (http://www.cs.waikato.ac.nz/ml/weka/) (Version 3.7)
 
+Static WSDL file for each version can be found at (replace {i} with the version):
+http://ssrg18.cs.ualberta.ca:8080/SMLService/files/wsdl/SMLService_v{i}.wsdl
+
+WSDL for the current version can be found at:
+http://ssrg18.cs.ualberta.ca:8080/SMLService/services/SMLService?wsdl
+
 The service offers the following operations:
 
 -------------
