@@ -3,7 +3,7 @@ package edu.sml.data;
 public class SimpleKMeansRequest {
 	
 	private String sourceData;
-	private FileType fileType;
+	private String fileType;
 	private int numberOfClusters;
 
 	public int getNumberOfClusters() {
@@ -22,11 +22,11 @@ public class SimpleKMeansRequest {
 		this.sourceData = sourceData;
 	}
 
-	public FileType getFileType() {
+	public String getFileType() {
 		return fileType;
 	}
 
-	public void setFileType(FileType fileType) {
+	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
 	

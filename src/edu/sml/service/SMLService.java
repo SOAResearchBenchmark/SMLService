@@ -8,7 +8,6 @@ import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import weka.core.converters.CSVLoader;
-import edu.sml.data.FileType;
 import edu.sml.data.J48Request;
 import edu.sml.data.J48Response;
 import edu.sml.data.SimpleKMeansRequest;
@@ -29,17 +28,17 @@ public class SMLService {
 		SimpleKMeans clusterer = new SimpleKMeans();
 		SimpleKMeansResponse response = new SimpleKMeansResponse();
 		String sourceData = request.getSourceData();
-		FileType fileType = request.getFileType();
+		String fileType = request.getFileType();
 		int numOfClusters = request.getNumberOfClusters();
-		String filePath = FileUtils.stringToFile(sourceData, fileType.getType());
+		String filePath = FileUtils.stringToFile(sourceData, fileType);
 		Instances data = null;
 		try {
-			if(fileType.equals(FileType.CSV)) {
+			if(fileType.toLowerCase().equals("csv")) {
 				CSVLoader loader = new CSVLoader();
 				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
-			else if(fileType.equals(FileType.ARFF)) {
+			else if(fileType.toLowerCase().equals("arff")) {
 				ArffLoader loader = new ArffLoader();
 				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
@@ -74,15 +73,15 @@ public class SMLService {
 		try {
 			String sourceData = request.getSourceData();
 			int classIndex = request.getClassIndex();
-			FileType fileType = request.getFileType();
-			String filePath = FileUtils.stringToFile(sourceData, fileType.getType());
+			String fileType = request.getFileType();
+			String filePath = FileUtils.stringToFile(sourceData, fileType);
 			Instances data = null;
-			if(fileType.equals(FileType.CSV)) {
+			if(fileType.toLowerCase().equals("csv")) {
 				CSVLoader loader = new CSVLoader();
 				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
-			else if(fileType.equals(FileType.ARFF)) {
+			else if(fileType.toLowerCase().equals("arff")) {
 				ArffLoader loader = new ArffLoader();
 				loader.setFile(new File(filePath));
 				data = loader.getDataSet();

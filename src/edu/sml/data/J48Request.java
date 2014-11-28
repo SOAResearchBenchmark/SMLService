@@ -3,7 +3,7 @@ package edu.sml.data;
 public class J48Request {
 
 	private String sourceData;
-	private FileType fileType;
+	private String fileType;
 	private int classIndex;
 
 	public String getSourceData() {
@@ -22,11 +22,11 @@ public class J48Request {
 		this.classIndex = classIndex;
 	}
 
-	public FileType getFileType() {
+	public String getFileType() {
 		return fileType;
 	}
 
-	public void setFileType(FileType fileType) {
+	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
 	
