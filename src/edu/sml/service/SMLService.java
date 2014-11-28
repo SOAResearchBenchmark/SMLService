@@ -17,12 +17,12 @@ import edu.sml.utils.FileUtils;
 public class SMLService {
 	
 	//my paths
-	//public static final String LOCAL_FILES_PATH = "WebContent/files/";
-	//public static final String SERVER_FILES_PATH = "WebContent/files/";
+	public static final String LOCAL_FILES_PATH = "WebContent/files/";
+	public static final String SERVER_FILES_PATH = "WebContent/files/";
 	
 	//ssrg paths
-	public static final String LOCAL_FILES_PATH = "/var/lib/tomcat7/webapps/SMLService/files/";
-	public static final String SERVER_FILES_PATH = "http://ssrg18.cs.ualberta.ca:8080/SMLService/files/";
+	//public static final String LOCAL_FILES_PATH = "/var/lib/tomcat7/webapps/SMLService/files/";
+	//public static final String SERVER_FILES_PATH = "http://ssrg18.cs.ualberta.ca:8080/SMLService/files/";
 	
 	public SimpleKMeansResponse clusterDataWithSimpleKMeans(SimpleKMeansRequest request) {
 		SimpleKMeans clusterer = new SimpleKMeans();
