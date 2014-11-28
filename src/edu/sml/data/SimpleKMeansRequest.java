@@ -2,8 +2,9 @@ package edu.sml.data;
 
 public class SimpleKMeansRequest {
 	
-	public String sourceQualifiedName;
-	public int numberOfClusters;
+	private String sourceData;
+	private FileType fileType;
+	private int numberOfClusters;
 
 	public int getNumberOfClusters() {
 		return numberOfClusters;
@@ -13,12 +14,20 @@ public class SimpleKMeansRequest {
 		this.numberOfClusters = numberOfClusters;
 	}
 
-	public String getSourceQualifiedName() {
-		return sourceQualifiedName;
+	public String getSourceData() {
+		return sourceData;
 	}
 
-	public void setSourceQualifiedName(String sourceQualifiedName) {
-		this.sourceQualifiedName = sourceQualifiedName;
+	public void setSourceData(String sourceData) {
+		this.sourceData = sourceData;
+	}
+
+	public FileType getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(FileType fileType) {
+		this.fileType = fileType;
 	}
 	
 	

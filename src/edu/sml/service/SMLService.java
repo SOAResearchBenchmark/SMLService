@@ -8,10 +8,12 @@ import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import weka.core.converters.CSVLoader;
+import edu.sml.data.FileType;
 import edu.sml.data.J48Request;
 import edu.sml.data.J48Response;
 import edu.sml.data.SimpleKMeansRequest;
 import edu.sml.data.SimpleKMeansResponse;
+import edu.sml.utils.FileUtils;
 
 public class SMLService {
 	
@@ -23,25 +25,23 @@ public class SMLService {
 	public static final String LOCAL_FILES_PATH = "/var/lib/tomcat7/webapps/SMLService/files/";
 	public static final String SERVER_FILES_PATH = "http://ssrg18.cs.ualberta.ca:8080/SMLService/files/";
 	
-	public String getFilesPath() {
-		return LOCAL_FILES_PATH;
-	}
-	
 	public SimpleKMeansResponse clusterDataWithSimpleKMeans(SimpleKMeansRequest request) {
 		SimpleKMeans clusterer = new SimpleKMeans();
 		SimpleKMeansResponse response = new SimpleKMeansResponse();
-		String inputFile = request.getSourceQualifiedName();
+		String sourceData = request.getSourceData();
+		FileType fileType = request.getFileType();
 		int numOfClusters = request.getNumberOfClusters();
+		String filePath = FileUtils.stringToFile(sourceData, fileType.getType());
 		Instances data = null;
 		try {
-			if(inputFile.endsWith(".csv")) {
+			if(fileType.equals(FileType.CSV)) {
 				CSVLoader loader = new CSVLoader();
-				loader.setFile(new File(inputFile));
+				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
-			else if(inputFile.endsWith(".arff")) {
+			else if(fileType.equals(FileType.ARFF)) {
 				ArffLoader loader = new ArffLoader();
-				loader.setFile(new File(inputFile));
+				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
 			else {
@@ -72,17 +72,19 @@ public class SMLService {
 		J48 classifier = new J48();
 		J48Response response = new J48Response();
 		try {
-			String inputFile = request.getSourceQualifiedName();
+			String sourceData = request.getSourceData();
 			int classIndex = request.getClassIndex();
+			FileType fileType = request.getFileType();
+			String filePath = FileUtils.stringToFile(sourceData, fileType.getType());
 			Instances data = null;
-			if(inputFile.endsWith(".csv")) {
+			if(fileType.equals(FileType.CSV)) {
 				CSVLoader loader = new CSVLoader();
-				loader.setFile(new File(inputFile));
+				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
-			else if(inputFile.endsWith(".arff")) {
+			else if(fileType.equals(FileType.ARFF)) {
 				ArffLoader loader = new ArffLoader();
-				loader.setFile(new File(inputFile));
+				loader.setFile(new File(filePath));
 				data = loader.getDataSet();
 			}
 			else {

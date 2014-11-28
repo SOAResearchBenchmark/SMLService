@@ -2,15 +2,16 @@ package edu.sml.data;
 
 public class J48Request {
 
-	private String sourceQualifiedName;
+	private String sourceData;
+	private FileType fileType;
 	private int classIndex;
 
-	public String getSourceQualifiedName() {
-		return sourceQualifiedName;
+	public String getSourceData() {
+		return sourceData;
 	}
 
-	public void setSourceQualifiedName(String sourceQualifiedName) {
-		this.sourceQualifiedName = sourceQualifiedName;
+	public void setSourceData(String sourceData) {
+		this.sourceData = sourceData;
 	}
 
 	public int getClassIndex() {
@@ -20,6 +21,15 @@ public class J48Request {
 	public void setClassIndex(int classIndex) {
 		this.classIndex = classIndex;
 	}
+
+	public FileType getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(FileType fileType) {
+		this.fileType = fileType;
+	}
+	
 	
 	
 }

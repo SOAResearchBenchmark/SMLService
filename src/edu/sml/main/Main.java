@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		SMLService service = new SMLService();
 		J48Request request = new J48Request();
-		request.setSourceQualifiedName("WebContent/files/iris.csv");
+		request.setSourceData("WebContent/files/iris.csv");
 		request.setClassIndex(4);
 		J48Response response = service.classifyDataWithJ48(request);
 		System.out.println(response.getResponseMessage());
@@ -27,10 +27,9 @@ public class Main {
 
 	private static void clusterWithSimpleKMeans() {
 		SMLService service = new SMLService();
-		String filesPath = service.getFilesPath();
 		SimpleKMeansRequest request = new SimpleKMeansRequest();
 		request.setNumberOfClusters(3);
-		request.setSourceQualifiedName("WebContent/files/iris.csv");
+		request.setSourceData("WebContent/files/iris.csv");
 		SimpleKMeansResponse response = service.clusterDataWithSimpleKMeans(request);
 		System.out.println(response.getResponseMessage());
 	}
