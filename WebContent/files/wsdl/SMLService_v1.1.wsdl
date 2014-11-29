@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.sml.edu" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://data.sml.edu/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.sml.edu">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://data.sml.edu/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.sml.edu">
+            <xs:import namespace="http://data.sml.edu/xsd"/>
+            <xs:element name="clusterDataWithSimpleKMeans">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:SimpleKMeansRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="clusterDataWithSimpleKMeansResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:SimpleKMeansResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="classifyDataWithJ48">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:J48Request"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="classifyDataWithJ48Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:J48Response"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://data.sml.edu/xsd">
+            <xs:complexType name="SimpleKMeansRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fileType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="numberOfClusters" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sourceData" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SimpleKMeansResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="clusterAssignments" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="numberOfClusters" type="xs:int"/>
+                    <xs:element minOccurs="0" name="responseMessage" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="statusCode" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="J48Request">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="classIndex" type="xs:int"/>
+                    <xs:element minOccurs="0" name="fileType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sourceData" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="J48Response">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="responseMessage" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="statusCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tree" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="classifyDataWithJ48Request">
+        <wsdl:part name="parameters" element="ns:classifyDataWithJ48"/>
+    </wsdl:message>
+    <wsdl:message name="classifyDataWithJ48Response">
+        <wsdl:part name="parameters" element="ns:classifyDataWithJ48Response"/>
+    </wsdl:message>
+    <wsdl:message name="clusterDataWithSimpleKMeansRequest">
+        <wsdl:part name="parameters" element="ns:clusterDataWithSimpleKMeans"/>
+    </wsdl:message>
+    <wsdl:message name="clusterDataWithSimpleKMeansResponse">
+        <wsdl:part name="parameters" element="ns:clusterDataWithSimpleKMeansResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SMLServicePortType">
+        <wsdl:operation name="classifyDataWithJ48">
+            <wsdl:input message="ns:classifyDataWithJ48Request" wsaw:Action="urn:classifyDataWithJ48"/>
+            <wsdl:output message="ns:classifyDataWithJ48Response" wsaw:Action="urn:classifyDataWithJ48Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="clusterDataWithSimpleKMeans">
+            <wsdl:input message="ns:clusterDataWithSimpleKMeansRequest" wsaw:Action="urn:clusterDataWithSimpleKMeans"/>
+            <wsdl:output message="ns:clusterDataWithSimpleKMeansResponse" wsaw:Action="urn:clusterDataWithSimpleKMeansResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SMLServiceSoap11Binding" type="ns:SMLServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="classifyDataWithJ48">
+            <soap:operation soapAction="urn:classifyDataWithJ48" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="clusterDataWithSimpleKMeans">
+            <soap:operation soapAction="urn:clusterDataWithSimpleKMeans" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SMLServiceSoap12Binding" type="ns:SMLServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="classifyDataWithJ48">
+            <soap12:operation soapAction="urn:classifyDataWithJ48" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="clusterDataWithSimpleKMeans">
+            <soap12:operation soapAction="urn:clusterDataWithSimpleKMeans" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SMLServiceHttpBinding" type="ns:SMLServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="classifyDataWithJ48">
+            <http:operation location="classifyDataWithJ48"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="clusterDataWithSimpleKMeans">
+            <http:operation location="clusterDataWithSimpleKMeans"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SMLService">
+        <wsdl:port name="SMLServiceHttpSoap11Endpoint" binding="ns:SMLServiceSoap11Binding">
+            <soap:address location="http://ssrg18.cs.ualberta.ca:8080/SMLService/services/SMLService.SMLServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SMLServiceHttpSoap12Endpoint" binding="ns:SMLServiceSoap12Binding">
+            <soap12:address location="http://ssrg18.cs.ualberta.ca:8080/SMLService/services/SMLService.SMLServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SMLServiceHttpEndpoint" binding="ns:SMLServiceHttpBinding">
+            <http:address location="http://ssrg18.cs.ualberta.ca:8080/SMLService/services/SMLService.SMLServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
